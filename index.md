@@ -180,31 +180,304 @@
     <li><strong>Loop and Logic Control</strong>: The <code>loop()</code> function handles the continuous behavior of WALL-E, such as distance measurement and Bluetooth integration.</li>
   </ul>
 
-  <pre>
-    <code>
-    // Include necessary libraries
-    #include &lt;LiquidCrystal_I2C.h&gt;
-    #include &lt;LedControl.h&gt;
-    #include &lt;Servo.h&gt;
-    #include &lt;NeoSWSerial.h&gt;
+  c++
+//pre-existing libraries
+#include <LiquidCrystal_I2C.h>
+#include <LedControl.h>
+#include <Servo.h>
+#include <NeoSWSerial.h>
+// Pins for LED matrix connected to Arduino
+int DIN = 11;
+int CS = 9;
+int CLK = 10;
+int DIN_2 = 6;
+int CS_2 = 8;
+int CLK_2 = 7;
 
-    // Main loop to handle sensor reading, emotion display, and Bluetooth
-    void loop() {
-      // Measure distance
-      distance = measureDistance();
-      if (distance < 10) {
-        displayEmotion("Sad");
-        displayPattern(sad_bmp, sad_bmp);
-      } else if (distance < 30) {
-        displayEmotion("Happy");
-        displayPattern(happyL_bmp, happyR_bmp);
-      } else {
-        displayEmotion("Neutral");
-        displayPattern(neutral_bmp, neutral_bmp);
-      }
+// Create instances for LCD and LED matrix
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+LedControl ledmatrix = LedControl(DIN, CLK, CS);
+LedControl ledmatrix_2 = LedControl(DIN_2, CLK_2, CS_2);
+
+//create instances for bluetooth pins
+NeoSWSerial bluetooth(A1, A0);
+
+
+// Create instances for the Servos
+Servo pan;
+Servo tilt;
+Servo leftBrow;
+Servo rightBrow;
+
+// Pins for the ultrasonic sensor
+const int trigPin = 13;
+const int echoPin = 12;
+
+// Variable to measure distance
+float duration, distance;
+
+// bluetooth state variables 
+unsigned char state = 'N';
+char recVbuffer[32];
+unsigned recVindex =0;
+
+// Bitmap patterns for emotions
+byte neutral_bmp[8] = {B00000000, B00111100, B01000010, B01011010, B01011010, B01000010, B00111100, B00000000};
+byte happyL_bmp[8] = {B00000000, B00011100, B00100100, B01011100, B01011100, B00100100, B00011100, B00000000};
+byte happyR_bmp[8] = {B00000000, B00111000, B00100100, B00111010, B00111010, B00100100, B00111000, B00000000};
+byte loveL_bmp[8] = {B00011000, B00100100, B01000010, B10000001, B10000001, B10011001, B01100110, B00000000};
+byte loveR_bmp[8] = {B00011000, B00100100, B01000010, B10000001, B10000001, B10011001, B01100110, B00000000};
+byte sad_bmp[8] = {B10000001, B01000010, B00100100, B00011000, B00011000, B00100100, B01000010, B10000001};
+byte surprisedL_bmp[8] = {B00000000, B01111110, B01000010, B01000010, B01000010, B01000010, B01111110, B00000000};
+byte surprisedR_bmp[8] = {B00000000, B01111110, B01000010, B01000010, B01000010, B01000010, B01111110, B00000000};
+
+// Function to display pattern on LED matrix
+void displayPattern(byte patternL[], byte patternR[]) {
+  for (int i = 0; i < 8; i++) {
+    ledmatrix.setColumn(0, i, patternL[i]);
+    ledmatrix_2.setColumn(0, i, patternR[i]);
+  }
+}
+
+// Function to write emotion on LCD
+void displayEmotion(String emotion) {
+  lcd.clear();
+  lcd.print(emotion);
+}
+
+// Function to move servos
+void moveServos(int left, int right, int panIn, int tiltIn) {
+  leftBrow.write(left);
+  rightBrow.write(right);
+  pan.write(panIn);
+  tilt.write(tiltIn);
+}
+
+// Function to measure distance using ultrasonic sensor
+float measureDistance() {
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  duration = pulseIn(echoPin, HIGH);
+  return (duration * 0.0343) / 2;
+}
+
+//variables for led lights to make code quicker
+unsigned long lastBlinkTime = 0;
+bool isDisplayOn = true;
+
+
+void setup() {
+  // Debugging
+  Serial.begin(9600);
+  bluetooth.begin(9600);
+
+  // Set up LCD
+  lcd.init();
+  lcd.backlight();
+
+  // Set up LED matrices
+  ledmatrix.shutdown(0, false);
+  ledmatrix.setIntensity(0, 1);
+  ledmatrix.clearDisplay(0);
+
+  ledmatrix_2.shutdown(0, false);
+  ledmatrix_2.setIntensity(0, 1);
+  ledmatrix_2.clearDisplay(0);
+
+  // Initialize columns with letters
+  displayPattern(neutral_bmp, neutral_bmp);  // Initial neutral pattern
+  displayEmotion("Neutral");  // Initial neutral emotion
+
+  // Define input/outputs
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+
+  // Attach servos
+  pan.attach(5);
+  tilt.attach(4);
+  leftBrow.attach(2);
+  rightBrow.attach(3);
+
+  // Set initial positions
+  moveServos(60, 90, 130, 90);
+
+  
+}
+
+void loop() {
+//logic to display text on LCD screen
+if(state == 255){
+  if(bluetooth.available() > 0){
+    char recieved = bluetooth.read();
+    if(recieved == 0){
+      state = 0;
+      recVbuffer[recVindex] =0;
+      displayEmotion(recVbuffer);
+      Serial.println(recVbuffer);
+      delay(3000);
     }
-    </code>
-  </pre>
+    if(recVindex < 33){
+      recVbuffer[recVindex] = recieved;
+      recVindex += 1;
+      if(recVindex == 16){
+        
+        recVindex += 1;
+      }
+
+    }
+  }
+  return;
+}
+  distance = measureDistance();
+//initalize bluetooth
+if (bluetooth.available() > 0) {
+  state = bluetooth.read();
+  Serial.println((unsigned)state);
+
+}
+
+if(state ==255){
+  recVindex =0;
+  return;
+
+}
+
+  // Priority handling: Motion detection takes precedence
+  if (distance <= 10 && distance > 0) {
+    moveServos(60, 120, 130, 90);
+    displayPattern(sad_bmp, sad_bmp);
+    displayEmotion("Please back up!");
+    for (int i = 90; i > 45; i--) {
+      delay(10);
+      tilt.write(i);
+    }
+    for (int j = 45; j < 135; j++) {
+      delay(10);
+      tilt.write(j);
+    }
+  } else if (distance <= 30 && distance > 10) {
+    tilt.write(90);
+    displayPattern(happyL_bmp, happyR_bmp);
+    displayEmotion("I am so happy");
+    leftBrow.write(90);
+    rightBrow.write(90);
+    for (int i = 150; i > 110; i--) {
+      delay(10);
+      pan.write(i);
+    }
+    for (int j = 110; j < 150; j++) {
+      delay(10);
+      pan.write(j);
+    }
+  } else if (distance <= 50 && distance > 30) {
+    displayEmotion("I love you");
+    moveServos(90, 90, 130, 90);
+    displayPattern(loveL_bmp, loveR_bmp);
+    delay(500);  // On for 500ms
+    ledmatrix.clearDisplay(0);  // Turn off left matrix
+    ledmatrix_2.clearDisplay(0);  // Turn off right matrix
+    delay(500);  // Off for 500ms
+  } else {
+    //switch cases to handle buttons pressing in app
+       switch (state) {
+  case 'A':
+    displayPattern(sad_bmp, sad_bmp);
+    displayEmotion("I am Angry!");
+     moveServos(60, 120, 130, 90);
+    for (int i = 90; i > 45; i--) {
+      delay(10);
+      tilt.write(i);
+    }
+    for (int j = 45; j < 135; j++) {
+      delay(10);
+      tilt.write(j);
+    }
+    break;
+
+  case 'H':
+    displayPattern(happyL_bmp, happyR_bmp);
+    displayEmotion("I am Happy!");
+    moveServos(120, 60, 130, 90);
+    leftBrow.write(90);
+    rightBrow.write(90);
+    for (int i = 150; i > 110; i--) {
+      delay(10);
+      pan.write(i);
+    }
+    for (int j = 110; j < 150; j++) {
+      delay(10);
+      pan.write(j);
+    }
+    break;
+
+  case 'N':
+    displayPattern(neutral_bmp, neutral_bmp);
+    displayEmotion("Hello!");
+    moveServos(120, 60, 130, 90);
+    break;
+
+  case 'B':
+    displayEmotion("Love!");
+    moveServos(120, 60, 130, 90);
+    if (millis() - lastBlinkTime >= 500) {
+      lastBlinkTime = millis();
+      if (isDisplayOn) {
+        ledmatrix.clearDisplay(0);
+        ledmatrix_2.clearDisplay(0);
+      } else {
+        displayPattern(loveL_bmp, loveR_bmp);
+      }
+      isDisplayOn = !isDisplayOn;
+    }
+    break;
+
+  case 'L':
+    displayEmotion("Looking Left");
+    if (tilt.read() > 20) {
+      tilt.write(tilt.read() - 3);
+      delay(1);
+    }
+    break;
+
+  case 'R':
+    displayEmotion("Looking Right");
+    if (tilt.read() < 160) {
+      tilt.write(tilt.read() + 3);
+     delay(1);
+    }
+    break;
+
+  case 'U':
+    displayEmotion("Looking Up");
+    if (pan.read() > 75) {
+      pan.write(pan.read() - 3);
+      delay(1);
+    }
+    break;
+
+  case 'D':
+    displayEmotion("Looking Down");
+    if (pan.read() < 160) {
+      pan.write(pan.read() + 3);
+      delay(1);
+    }
+    break;
+
+  case 'Z':
+    // Do nothing, keep the current position
+    break;
+
+  default:
+    displayPattern(neutral_bmp, neutral_bmp);
+    displayEmotion("Hello!");
+    moveServos(120, 60, 130, 90);  // Eyebrows up, slight head tilt up
+    break;
+}
+}
+}
 
 </section>
 
