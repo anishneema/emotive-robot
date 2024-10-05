@@ -25,6 +25,22 @@
 **Important skills learned**
 -Soldering, Dremeling, Arduino programming, Ultrasonic sensor integration, Remote control system developement, App development and design, Wireless communication, Servo integration, Electrical wiring
 
+<section id="introduction">
+  <h2>Introduction</h2>
+  <p>
+    Human interaction with technology is rapidly evolving, with emotional engagement playing an increasingly important role in improving the human experience. Emotional robots, which are capable of detecting, processing, and responding to user behavior, have seen growing applications in healthcare, therapy, and education. The ability for machines to convey empathy or simulate emotions allows for unique, non-verbal interaction models that can serve people who have limited means of traditional communication.
+  </p>
+  <p>
+    The motivation for developing WALL-E stems from the idea of integrating technology into our daily lives in a way that not only provides utility but also enhances emotional well-being. WALL-E was designed to be a friendly companion that can recognize human gestures and respond with different emotional states. The inspiration for this project comes from exploring how emotionally intelligent robotics can offer supportive roles in people's lives, specifically by making human-robot interaction accessible and intuitive.
+  </p>
+  <p>
+    This project brings together a combination of hardware and software components, with an emphasis on emotional communication through movement, visual cues, and reactive expressions. Utilizing ultrasonic sensors, LED matrices, and servo motors, WALL-E is capable of responding to gestures with expressions that range from happiness to surprise. Additionally, a custom-built Android application adds further interaction options by enabling remote control.
+  </p>
+  <p>
+    By creating an emotionally responsive robot, this project aims to show how technological advancements can go beyond the functional and instead create bonds that are both comforting and beneficial, particularly for those with barriers in expressing or understanding emotions. This document will take you through the process of building WALL-E, the decisions made during the development, the challenges faced, and how this robot represents a step forward in the field of affective robotics.
+  </p>
+</section>
+
 ### Modification: Android App!
 
 In this milestone, I worked on controlling Robo from a remote controlled app. Key achievements include: 
