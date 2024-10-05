@@ -90,7 +90,7 @@
     The <strong>Android application</strong> for remote control was built using MIT App Inventor. The app interface consists of buttons for different commands, such as "Head Up," "Turn Left," and different emotional modes like "Happy" or "Angry." The app communicates with the HC-05 Bluetooth module to send these commands to the Arduino.
   </p>
   <figure>
-    <img src="appcode.png)" alt="Android Application Design">
+    <img src="appcode.png" alt="Android Application Design">
     <figcaption>Figure 4: Android Application Interface</figcaption>
   </figure>
 
