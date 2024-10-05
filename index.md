@@ -41,6 +41,68 @@
   </p>
 </section>
 
+<section id="methodology">
+  <h2>2. Methodology</h2>
+  
+  <h3>2.1 Overview of Hardware Components</h3>
+  <p>
+    The WALL-E robot involves a variety of hardware components, each fulfilling a critical role in providing emotional interaction and physical movement. The key components used are described below:
+  </p>
+  <ul>
+    <li><strong>Arduino Uno</strong>: Acts as the main control board, responsible for processing inputs from the various sensors and generating outputs to control the servos, LCD screen, and LED matrix.</li>
+    <li><strong>Ultrasonic Sensor (HC-SR04)</strong>: Detects the user's proximity, enabling WALL-E to change its emotional expression depending on how close or far a user is.</li>
+    <li><strong>LCD Screen (16x2)</strong>: Provides a text-based representation of WALL-E's emotional state, adding a layer of non-verbal communication to the interaction.</li>
+    <li><strong>LED Matrix (8x8)</strong>: Represents different emotional states through changes in WALL-E's "eyes" by displaying different LED patterns, adding a layer of expressiveness.</li>
+    <li><strong>Bluetooth Module (HC-05)</strong>: Connects WALL-E to a mobile device, allowing remote control through a custom-built Android app.</li>
+    <li><strong>Servos</strong>: Control WALL-E's physical movements, such as head tilts and eyebrow movements, giving WALL-E dynamic responses based on different stimuli.</li>
+  </ul>
+  <figure>
+    <img src="schematicwithbluetoothj_bb.png" alt="WALL-E Wiring Schematic">
+    <figcaption>Figure 1: Wiring Schematic of WALL-E Robot</figcaption>
+  </figure>
+
+  <h3>2.2 Electrical Schematic and Wiring</h3>
+  <p>
+    The electrical schematic of WALL-E demonstrates the integration of all key components. The Arduino Uno acts as the hub, with each device connected to the appropriate power, ground, and signal pins.
+  </p>
+  <p>
+    The <strong>HC-SR04 ultrasonic sensor</strong> was connected with its trigger pin and echo pin to digital pins on the Arduino, allowing distance measurements. The <strong>HC-05 Bluetooth module</strong> was connected through a voltage divider to match its 3.3V level, ensuring compatibility with the 5V output of the Arduino. The <strong>servos</strong> were wired to control head and eyebrow movement, providing expressiveness, and the <strong>LCD screen</strong> was connected to display messages.
+  </p>
+
+ <h3>2.3 Software Development</h3>
+
+  <h4>2.3.1 Arduino Code for Emotions and Reactions</h4>
+  <p>
+    The Arduino code is the heart of WALL-E's functionality. It integrates sensor input, Bluetooth commands, and controls to provide appropriate physical responses.
+  </p>
+  <ul>
+    <li><strong>Proximity Detection and Emotion Control</strong>: The <strong>HC-SR04 ultrasonic sensor</strong> measures the distance between the robot and an object. Based on distance thresholds, WALL-E changes its expressions accordingly.</li>
+    <li><strong>LED Matrix Animation</strong>: Displays different eye patterns corresponding to particular emotional states.</li>
+    <li><strong>LCD Screen Messages</strong>: Displays messages corresponding to emotional states.</li>
+  </ul>
+  <figure>
+    <img src="logic.png" alt="Emotion Logic Flowchart">
+    <figcaption>Figure 3: Logic Flowchart for Emotional Reactions</figcaption>
+  </figure>
+
+  <h4>2.3.2 Mobile Application for Remote Control</h4>
+  <p>
+    The <strong>Android application</strong> for remote control was built using MIT App Inventor. The app interface consists of buttons for different commands, such as "Head Up," "Turn Left," and different emotional modes like "Happy" or "Angry." The app communicates with the HC-05 Bluetooth module to send these commands to the Arduino.
+  </p>
+  <figure>
+    <img src="appcode.png)" alt="Android Application Design">
+    <figcaption>Figure 4: Android Application Interface</figcaption>
+  </figure>
+
+  <h3>2.4 Challenges Encountered</h3>
+  <ul>
+    <li><strong>Bluetooth Connectivity Issues</strong>: Establishing consistent and reliable communication with the Bluetooth module required attention to voltage differences between Arduino pins and the HC-05.</li>
+    <li><strong>Servo Calibration and Power Issues</strong>: The servos required fine calibration to avoid jerky movement, and improper grounding initially caused power issues.</li>
+    <li><strong>Managing Concurrent Outputs</strong>: Synchronizing multiple outputs was a challenge. Efficient use of Arduino's timing functions ensured smooth operation.</li>
+  </ul>
+</section>
+
+
 ### Modification: Android App!
 
 In this milestone, I worked on controlling Robo from a remote controlled app. Key achievements include: 
