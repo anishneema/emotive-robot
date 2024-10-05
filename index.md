@@ -9,7 +9,18 @@
   <img src="download.gif" style="width: 100%; height: 70%;" alt="First Image">
 </div>
 
-Have you ever wanted a personalized robot companion? Look no further! WALL-E is here, an innovative automative robot that responds to your presence. By simply moving your hand closer or farther away, you can change WALL-E's emotions and movements. This project combines Arduino programming, sensor technology, and expressive visual elements to make a robot come to life. This page serves as a comprehensive guide on my steps taken to learn and implement over a time period of two weeks. The principles of this project can serve as a powerful tool for individuals to communicate without voice. 
+<section id="abstract">
+  <h2>Abstract</h2>
+  <p>
+    WALL-E is an interactive, emotive robot designed as a personalized companion, capable of reacting to human gestures through proximity sensing and emotion simulation. The goal of this project is to create a robot that fosters human-robot interaction by providing emotional feedback using non-verbal cues such as facial expressions, head movements, and messages on an LCD screen. By using an Arduino Uno, servos, ultrasonic sensors, and a mobile app, WALL-E can respond to user proximity with different emotions.
+  </p>
+  <p>
+    The potential applications of WALL-E extend beyond simple companionship. Specifically, it can serve as a communication tool for individuals who face difficulties in expressing emotions, such as those with alexithymia. The integration of servo motors to mimic facial expressions, LED matrices to simulate eye movements, and an LCD screen to convey messages allows for an immersive emotional experience without requiring verbal interaction. This project contributes to the broader field of affective computing by combining robotics, sensor technology, and human-centered design.
+  </p>
+  <p>
+    This paper documents the hardware and software development process, challenges encountered, and future opportunities for enhancing WALL-E’s capabilities to better serve its intended purpose as an emotional support companion.
+  </p>
+</section>
 
 **Important skills learned**
 -Soldering, Dremeling, Arduino programming, Ultrasonic sensor integration, Remote control system developement, App development and design, Wireless communication, Servo integration, Electrical wiring
