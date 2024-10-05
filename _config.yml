@@ -1,0 +1,5 @@
+theme: jekyll-theme-slate
+markdown: kramdown
+sass:
+  load_paths: [assets/css]
+  
