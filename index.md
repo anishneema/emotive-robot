@@ -18,7 +18,7 @@
     The potential applications of WALL-E extend beyond simple companionship. Specifically, it can serve as a communication tool for individuals who face difficulties in expressing emotions, such as those with alexithymia. The integration of servo motors to mimic facial expressions, LED matrices to simulate eye movements, and an LCD screen to convey messages allows for an immersive emotional experience without requiring verbal interaction. This project contributes to the broader field of affective computing by combining robotics, sensor technology, and human-centered design.
   </p>
   <p>
-    This paper documents the hardware and software development process, challenges encountered, and future opportunities for enhancing WALL-E’s capabilities to better serve its intended purpose as an emotional support companion.
+    This portfolio documents the hardware and software development process, challenges encountered, and future opportunities for enhancing WALL-E’s capabilities to better serve its intended purpose as an emotional support companion.
   </p>
 </section>
 
