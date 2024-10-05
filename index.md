@@ -349,7 +349,6 @@ To implement the LCD screen, I faced a unique problem. If I simply sent the stat
 
 ### Third Milestone: Working Robo!
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/_Hg3DoX7dsg?si=uwZ-TM2jvdGeN9fH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 In this milestone, I assembled a working automative robot. Key achievements include: 
 
@@ -685,7 +684,6 @@ This code is mostly the same as milestone 2, but with minor tweaks.
 
 ## Second Milestone: Integrating the components
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/WgoiZ1K0GwM?si=B_8jLmUFtSOCsSyv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 Using the Arduino IDE, I've successfully implemented multiple functions for each component of the WALL-E robot, as highlighted in the schematic below. Key achievements include:
 
@@ -931,7 +929,6 @@ void loop() {
 
 # First Milestone: Lighting up screens
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/YkfFGZ1TbZA?si=SSonITQkPW6j-yTY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 In this initial phase, I focused on:
 
@@ -970,54 +967,3 @@ Moving forward, I aim to:
 |various jumper cables|connecting all components together|$5.98|<a href=" https://www.amazon.com/Elegoo-EL-CP-004-Multicolored-Breadboard-arduino/dp/B01EV70C78/ref=asc_df_B01EV70C78/?tag=hyprod-20&linkCode=df0&hvadid=692875362841&hvpos=&hvnetw=g&hvrand=743854505051106635&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9032183&hvtargid=pla-2281435178578&mcid=6d8a7ca3c39a3ad4877ede949dc655a6&hvocijid=743854505051106635-B01EV70C78-&hvexpln=73&gad_source=1&th=1"> Link </a> |
 |3D printed parts|Container of robo|
 
-# Arduino Starter Project
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/IUZZ2V6nGmU?si=mzgKdNSG2Q01wio3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-I chose this starter project because it would give me a good introduction into how to code and use the Arduino. Additionally, it gave me great experience with soldering, and electrical components. I now have a basic idea of a circuit, and understand the layout of the breadboard. This knowledge has given me the confidence to continue on my main project, which will use the Arduino extensively, as well as plenty of electrical components. 
-
-![starter project](starterproject.png)
-*Figure 1: Arduino and breadboard wiring*
-
-- **Yellow**: provides 5V of power
-- **Orange**: connects to ground 
-- **Brown**: gives power to button 
-- **Black**: gives ground to button 
-- **Blue**: provides digital cue 
-- **Black**: provides ground to LED with resistor to stop voltage 
-
-When the button is pressed, the circuit is allowed to connect, causing the LED to light up. It is also possible to reverse this effect with the code. 
-
-[Project Guide](https://docs.arduino.cc/built-in-examples/digital/Button/):
-
-```cpp
-const int buttonPin = 2;  // the number of the pushbutton pin
-const int ledPin = 13;    // the number of the LED pin
-
-// variables will change:
-int buttonState = 0;  // variable for reading the pushbutton status
-
-void setup() {
-  // initialize the LED pin as an output:
-  pinMode(ledPin, OUTPUT);
-  // initialize the pushbutton pin as an input:
-  pinMode(buttonPin, INPUT);
-}
-
-void loop() {
-  // read the state of the pushbutton value:
-  buttonState = digitalRead(buttonPin);
-
-  // check if the pushbutton is pressed. If it is, the buttonState is HIGH:
-  if (buttonState == HIGH) {
-    // turn LED on:
-    digitalWrite(ledPin, HIGH);
-  } else {
-    // turn LED off:
-    digitalWrite(ledPin, LOW);
-  }
-}
-
-```
-
-Switching HIGH and LOW will reverse the effect of the LED light. Instead of turning on when pressed, it will turn off when pressed. 
