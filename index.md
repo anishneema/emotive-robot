@@ -4,11 +4,6 @@
 |:--:|:--:|:--:|:--:|
 |Anish N| Dougherty Valley High School | Computer Engineering | Incoming Senior
 
-
-<div style="display: flex; align-items: center; justify-content: space-between;">
-  <img src="download.gif" style="width: 100%; height: 70%;" alt="First Image">
-</div>
-
 <section id="abstract">
   <h2>Abstract</h2>
   <p>
@@ -230,4 +225,9 @@
 |Various M2 && M3 screws |assembly toolbox |$4.99 |<a href="https://www.amazon.com/DYWISHKEY-Pieces-Screws-Washers-Assortment/dp/B0CS9XVPLV/ref=sr_1_5?dib=eyJ2IjoiMSJ9.dh4QCEmZvciH5SBORhOCf75bMouvuVRAsfpzKgwH7vL3qE9hVvCkxHXIMEjY3AClbjCj1nowLTLXTWy9HpeeP_tURjiAhK6mKqwFIo94IAfClGjb6uS9TiMjzUswBqIJIi-8yiN-r17e9sW8e3-ywAt1h08lW7GXovk9ds6Vhvh11-V1cUFeQ_gNbs6nwPZtDqS5q0gNuZNU8O0UmgbdjWT7UU9cZF7B8GTORgzF8qw.WdawQ8PMaipfzxLESkhHX3kY3M3VV__lwt6X6uq1M5Y&dib_tag=se&hvadid=409999246310&hvdev=c&hvlocphy=9032183&hvnetw=g&hvqmt=b&hvrand=2835700877264352192&hvtargid=kwd-933490677&hydadcr=26614_10407671&keywords=m3%2Bscrews&qid=1721257749&sr=8-5&th=1">Link </a> |
 |various jumper cables|connecting all components together|$5.98|<a href=" https://www.amazon.com/Elegoo-EL-CP-004-Multicolored-Breadboard-arduino/dp/B01EV70C78/ref=asc_df_B01EV70C78/?tag=hyprod-20&linkCode=df0&hvadid=692875362841&hvpos=&hvnetw=g&hvrand=743854505051106635&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9032183&hvtargid=pla-2281435178578&mcid=6d8a7ca3c39a3ad4877ede949dc655a6&hvocijid=743854505051106635-B01EV70C78-&hvexpln=73&gad_source=1&th=1"> Link </a> |
 |3D printed parts|Container of robo|
+
+
+<div style="display: flex; align-items: center; justify-content: space-between;">
+  <img src="download.gif" style="width: 100%; height: 70%;" alt="First Image">
+</div>
 
